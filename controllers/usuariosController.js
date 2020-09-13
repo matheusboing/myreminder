@@ -3,13 +3,8 @@ const sqliteConnection = require("../db/database")
 
 
 const usuariosController = {
-    getAll(req, res) {
-        usuarios = database.select("SELECT * FROM usuarios")
-        res.send(usuarios)
-    },
-
     get(req, res) {
-        const id = req.params.id
+        const { id } = req.user
         let usuario = database.selectFirst(`SELECT * FROM usuarios WHERE usuarios.id = '${ id }'`)
 
         if(!usuario) {
@@ -29,7 +24,7 @@ const usuariosController = {
     },
 
     put(req, res) {
-        const { id } = req.params
+        const { id } = req.user
         const body = req.body
 
         let usuario = database.selectFirst(`SELECT id, nome, senha FROM usuarios WHERE usuarios.id = '${ body.id }'`)
@@ -49,7 +44,7 @@ const usuariosController = {
     },
 
     delete(req, res) {
-        const { id } = req.params
+        const { id } = req.user
         let usuario = database.selectFirst(`SELECT * FROM usuarios WHERE usuarios.id = ${id}`)
 
         if (!usuario) {

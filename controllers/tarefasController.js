@@ -3,7 +3,7 @@ const database = require("../db/database")
 
 const tarefasController = {
     getAll(req, res) {
-        tarefas = database.select("SELECT * FROM tarefas")
+        tarefas = database.select(`SELECT * FROM tarefas WHERE idUsuario = ${req.user.id}`)
         res.send(tarefas)
     },
 
@@ -20,7 +20,7 @@ const tarefasController = {
 
     post(req, res) {
         const body = req.body
-
+        body.idUsuario = req.user.id
         delete body.id
 
         body.id = database.insert('tarefas', body)

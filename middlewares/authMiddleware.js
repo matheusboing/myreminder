@@ -31,7 +31,7 @@ const authMiddleware = function(req, res, next){
     if(!usuario || usuario.senha != senha ) {
         return res.status(401).send()
     }
-
+    req.user = usuario
     next()
 
 }

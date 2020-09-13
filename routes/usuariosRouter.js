@@ -7,9 +7,8 @@ const authMiddleware = require("../middlewares/authMiddleware")
 router.use((req, res, next) => authMiddleware(req, res, next))
 
 app.use('/usuarios', 
-    router.get("/", (req, res) => usuariosController.getAll(req, res)),
-    router.get("/:id", (req, res) => usuariosController.get(req, res)),
+    router.get("/", (req, res) => usuariosController.get(req, res)),
     router.post("/", (req, res) => usuariosController.post(req, res)),
-    router.put("/:id", (req, res) => usuariosController.put(req, res)),
-    router.delete("/:id", (req, res) => usuariosController.delete(req, res)) 
+    router.put("/", (req, res) => usuariosController.put(req, res)),
+    router.delete("/", (req, res) => usuariosController.delete(req, res))
 )
